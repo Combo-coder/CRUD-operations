@@ -29,11 +29,12 @@ async def get_users(session: Annotated[Session, Depends(get_session_dependency)]
     return result.all()
 
 
+
 # create a user
 @app.post("/user/")
 async def create_user(user: User, session: Annotated[Session, Depends(get_session_dependency)]):
     new_user = user
-    session.add(user)
+    session.add(new_user)
     session.commit()
     session.refresh(new_user)
     return {"created successfully" : new_user}
